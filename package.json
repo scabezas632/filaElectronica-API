@@ -1,23 +1,24 @@
 {
-  "name": "filaelectronica-backend",
-  "version": "1.0.0",
-  "description": "Backend realizado en NodeJS y MongoDB para el chatbot FilaElectronica",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/scabezas632/filaElectronica-backend.git"
-  },
-  "author": "Samuel Cabezas",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/scabezas632/filaElectronica-backend/issues"
-  },
-  "homepage": "https://github.com/scabezas632/filaElectronica-backend#readme",
-  "dependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.16.3"
-  }
+    "name": "filaelectronica-backend",
+    "version": "1.0.0",
+    "description": "Backend realizado en NodeJS y MongoDB para el chatbot FilaElectronica",
+    "main": "app.js",
+    "scripts": {
+        "start": "node server/server",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/scabezas632/filaElectronica-backend.git"
+    },
+    "author": "Samuel Cabezas",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/scabezas632/filaElectronica-backend/issues"
+    },
+    "homepage": "https://github.com/scabezas632/filaElectronica-backend#readme",
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "express": "^4.16.3"
+    }
 }

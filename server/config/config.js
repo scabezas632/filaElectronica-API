@@ -17,7 +17,7 @@ let urlDB;
 if (process.env.NODE_ENV === 'dev') {
     urlDB = 'mongodb://localhost:27017/filaElectronicaDB'
 } else {
-    urlDB = 'mongodb://admin:Samuel987456@ds141661.mlab.com:41661/fila_electronica'
+    urlDB = process.env.MONGO_URI;
 }
 
 process.env.URLDB = urlDB;

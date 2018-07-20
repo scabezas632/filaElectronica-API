@@ -19,9 +19,6 @@ let usuarioSchema = new Schema({
     feNaci: {
         type: Date
     },
-    ultimaVisita: {
-        type: String
-    },
     estado: {
         type: Boolean,
         required: [true, 'El estado es obligatorio']

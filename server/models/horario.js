@@ -11,10 +11,6 @@ let horarioSchema = new Schema({
     domingo: {
         type: String,
         required: [true, 'El horario del domingo y festivos es obligatorio']
-    },
-    horarioEspecial: {
-        type: Schema.Types.ObjectId,
-        ref: 'HorarioEspecial',
     }
 });
 

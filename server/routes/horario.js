@@ -32,8 +32,7 @@ app.post('/horario', function(req, res) {
 
     let horario = new Horario({
         semana: body.semana,
-        domingo: body.domingo,
-        horarioEspecial: body.horarioEspecial
+        domingo: body.domingo
     });
 
     horario.save((err, horarioDB) => {

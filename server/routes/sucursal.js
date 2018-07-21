@@ -35,7 +35,8 @@ app.post('/sucursal', function(req, res) {
         telefono: body.telefono,
         direccion: body.direccion,
         gerente: body.gerente,
-        horario: body.horario
+        horario: body.horario,
+        horarioEspecial: body.horarioEspecial
     });
 
     sucursal.save((err, sucursalDB) => {

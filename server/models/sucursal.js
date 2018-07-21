@@ -25,6 +25,10 @@ let sucursalSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Horario',
         required: [true, 'El horario es obligatorio']
+    },
+    horarioEspecial: {
+        type: Schema.Types.ObjectId,
+        ref: 'HorarioEspecial',
     }
 });
 

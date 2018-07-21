@@ -6,6 +6,9 @@ const app = express();
 app.get('/oferta', function(req, res) {
 
     Oferta.find({})
+        .populate({
+            path: 'producto'
+        })
         .exec((err, ofertas) => {
 
             if (err) {

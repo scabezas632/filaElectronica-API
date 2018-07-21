@@ -15,6 +15,12 @@ app.get('/direccion', function(req, res) {
     }
 
     Direccion.find(query)
+        .populate({
+            path: 'comuna',
+            populate: {
+                path: 'region'
+            }
+        })
         .exec((err, direcciones) => {
 
             if (err) {

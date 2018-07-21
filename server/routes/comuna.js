@@ -15,6 +15,9 @@ app.get('/comuna', function(req, res) {
     }
 
     Comuna.find(query)
+        .populate({
+            path: 'region'
+        })
         .exec((err, comunas) => {
 
             if (err) {

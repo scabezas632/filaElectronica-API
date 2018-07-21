@@ -34,6 +34,7 @@ app.post('/sucursal', function(req, res) {
         nombre: body.nombre,
         telefono: body.telefono,
         direccion: body.direccion,
+        gerente: body.gerente,
         horario: body.horario
     });
 

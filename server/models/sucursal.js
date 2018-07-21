@@ -17,6 +17,10 @@ let sucursalSchema = new Schema({
         ref: 'Direccion',
         required: [true, 'La direccion es obligatoria']
     },
+    gerente: {
+        type: String,
+        required: [true, 'El gerente es obligatorio']
+    },
     horario: {
         type: Schema.Types.ObjectId,
         ref: 'Horario',

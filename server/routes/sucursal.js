@@ -6,6 +6,15 @@ const app = express();
 app.get('/sucursal', function(req, res) {
 
     Sucursal.find({})
+        .populate({
+            path: 'direccion horario horarioEspecial',
+            populate: {
+                path: 'comuna',
+                populate: {
+                    path: 'region'
+                }
+            }
+        })
         .exec((err, sucursales) => {
 
             if (err) {

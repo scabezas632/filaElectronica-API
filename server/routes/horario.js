@@ -31,12 +31,8 @@ app.post('/horario', function(req, res) {
     let body = req.body;
 
     let horario = new Horario({
-        semanaApertura: body.semanaApertura,
-        semanaCierre: body.semanaCierre,
-        sabadoApertura: body.sabadoApertura,
-        sabadoCierre: body.sabadoCierre,
-        domingoApertura: body.domingoApertura,
-        domingoCierre: body.domingoCierre,
+        semana: body.semana,
+        domingo: body.domingo,
         horarioEspecial: body.horarioEspecial
     });
 

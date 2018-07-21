@@ -12,13 +12,9 @@ let horarioEspecialSchema = new Schema({
         type: Date,
         required: [true, 'El dia es obligatorio']
     },
-    horarioInicio: {
-        type: Date,
-        required: [true, 'El horario inicio es obligatorio']
-    },
-    horarioFin: {
-        type: Date,
-        required: [true, 'El horario fin es obligatorio']
+    horario: {
+        type: String,
+        required: [true, 'El horario es obligatorio']
     }
 });
 

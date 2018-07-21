@@ -20,11 +20,6 @@ let ofertaSchema = new Schema({
     ofertaFin: {
         type: Date,
         required: [true, 'La fecha fin es obligatoria']
-    },
-    estado: {
-        type: Boolean,
-        required: [true, 'El estado es obligatorio'],
-        default: true
     }
 });
 

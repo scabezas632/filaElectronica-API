@@ -65,7 +65,7 @@ app.post('/comuna', function(req, res) {
 app.put('/comuna/:id', function(req, res) {
     let id = req.params.id;
 
-    Comuna.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, comunaDB) => {
+    Comuna.findByIdAndUpdate(id, req.body, { new: true, runValidators: true }, (err, comunaDB) => {
 
         if (err) {
             return res.status(400).json({

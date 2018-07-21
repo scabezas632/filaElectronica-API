@@ -58,7 +58,7 @@ app.post('/oferta', function(req, res) {
 app.put('/oferta/:id', function(req, res) {
     let id = req.params.id;
 
-    Oferta.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, ofertaDB) => {
+    Oferta.findByIdAndUpdate(id, req.body, { new: true, runValidators: true }, (err, ofertaDB) => {
 
         if (err) {
             return res.status(400).json({

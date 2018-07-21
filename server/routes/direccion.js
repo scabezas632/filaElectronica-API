@@ -65,7 +65,7 @@ app.post('/direccion', function(req, res) {
 app.put('/direccion/:id', function(req, res) {
     let id = req.params.id;
 
-    Direccion.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, direccionDB) => {
+    Direccion.findByIdAndUpdate(id, req.body, { new: true, runValidators: true }, (err, direccionDB) => {
 
         if (err) {
             return res.status(400).json({

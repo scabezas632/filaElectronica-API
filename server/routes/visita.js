@@ -58,7 +58,7 @@ app.post('/visita', function(req, res) {
 app.put('/visita/:id', function(req, res) {
     let id = req.params.id;
 
-    Visita.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, visitaDB) => {
+    Visita.findByIdAndUpdate(id, req.body, { new: true, runValidators: true }, (err, visitaDB) => {
 
         if (err) {
             return res.status(400).json({

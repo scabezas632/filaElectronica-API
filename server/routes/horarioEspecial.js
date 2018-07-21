@@ -57,7 +57,7 @@ app.post('/horarioEspecial', function(req, res) {
 app.put('/horarioEspecial/:id', function(req, res) {
     let id = req.params.id;
 
-    HorarioEspecial.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, horarioEspecialDB) => {
+    HorarioEspecial.findByIdAndUpdate(id, req.body, { new: true, runValidators: true }, (err, horarioEspecialDB) => {
 
         if (err) {
             return res.status(400).json({

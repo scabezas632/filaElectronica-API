@@ -61,7 +61,7 @@ app.post('/horario', function(req, res) {
 app.put('/horario/:id', function(req, res) {
     let id = req.params.id;
 
-    Horario.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, horarioDB) => {
+    Horario.findByIdAndUpdate(id, req.body, { new: true, runValidators: true }, (err, horarioDB) => {
 
         if (err) {
             return res.status(400).json({

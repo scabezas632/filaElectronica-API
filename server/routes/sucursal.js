@@ -58,7 +58,7 @@ app.post('/sucursal', function(req, res) {
 app.put('/sucursal/:id', function(req, res) {
     let id = req.params.id;
 
-    Sucursal.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, sucursalDB) => {
+    Sucursal.findByIdAndUpdate(id, req.body, { new: true, runValidators: true }, (err, sucursalDB) => {
 
         if (err) {
             return res.status(400).json({

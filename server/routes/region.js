@@ -55,7 +55,7 @@ app.post('/region', function(req, res) {
 app.put('/region/:id', function(req, res) {
     let id = req.params.id;
 
-    Region.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, regionDB) => {
+    Region.findByIdAndUpdate(id, req.body, { new: true, runValidators: true }, (err, regionDB) => {
 
         if (err) {
             return res.status(400).json({

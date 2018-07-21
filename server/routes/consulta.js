@@ -58,7 +58,7 @@ app.post('/consulta', function(req, res) {
 app.put('/consulta/:id', function(req, res) {
     let id = req.params.id;
 
-    Consulta.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, consultaDB) => {
+    Consulta.findByIdAndUpdate(id, req.body, { new: true, runValidators: true }, (err, consultaDB) => {
 
         if (err) {
             return res.status(400).json({

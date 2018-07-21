@@ -66,7 +66,7 @@ app.post('/producto', function(req, res) {
 app.put('/producto/:id', function(req, res) {
     let id = req.params.id;
 
-    Producto.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, productoDB) => {
+    Producto.findByIdAndUpdate(id, req.body, { new: true, runValidators: true }, (err, productoDB) => {
 
         if (err) {
             return res.status(400).json({

@@ -14,11 +14,12 @@ app.get('/sucursal', function(req, res) {
         };
     }
 
-    Sucursal.find(query)
+    Sucursal.find({})
         .populate({
             path: 'direccion horario horarioEspecial',
             populate: {
                 path: 'comuna',
+                match: { 'nombre': req.query.comuna },
                 populate: {
                     path: 'region'
                 }
@@ -33,7 +34,7 @@ app.get('/sucursal', function(req, res) {
                 });
             };
 
-            Sucursal.count(query, (err, conteo) => {
+            Sucursal.count({}, (err, conteo) => {
                 res.json({
                     ok: true,
                     sucursales,

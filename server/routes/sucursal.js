@@ -38,7 +38,7 @@ app.get('/sucursal', function(req, res) {
                 return sucursal.direccion.comuna;
             });
 
-            Sucursal.count({}, (err, conteo) => {
+            sucursales.count({}, (err, conteo) => {
                 res.json({
                     ok: true,
                     sucursales,

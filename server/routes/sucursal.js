@@ -42,7 +42,7 @@ app.get('/sucursal', function(req, res) {
             res.json({
                 ok: true,
                 sucursales,
-                length: sucursales.length()
+                length: sucursales.length
             })
 
         })

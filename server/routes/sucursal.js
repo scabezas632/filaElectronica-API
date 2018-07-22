@@ -38,13 +38,12 @@ app.get('/sucursal', function(req, res) {
                 return sucursal.direccion.comuna;
             });
 
-            sucursales.count({}, (err, conteo) => {
-                res.json({
-                    ok: true,
-                    sucursales,
-                    length: conteo
-                })
-            });
+
+            res.json({
+                ok: true,
+                sucursales,
+                length: sucursales.length()
+            })
 
         })
 

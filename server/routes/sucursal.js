@@ -19,7 +19,7 @@ app.get('/sucursal', function(req, res) {
             path: 'direccion horario horarioEspecial',
             populate: {
                 path: 'comuna',
-                match: {},
+                match: query,
                 populate: {
                     path: 'region'
                 }

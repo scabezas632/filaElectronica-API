@@ -5,7 +5,16 @@ const app = express();
 
 app.get('/sucursal', function(req, res) {
 
-    Sucursal.find({})
+    // Si se busca por alguna comuna en especifico
+    // de lo contrario se buscan todas las sucursales
+    let query = {};
+    if (req.query.comuna) {
+        query = {
+            comuna: req.query.comuna
+        };
+    }
+
+    Sucursal.find(query)
         .populate({
             path: 'direccion horario horarioEspecial',
             populate: {
@@ -24,7 +33,7 @@ app.get('/sucursal', function(req, res) {
                 });
             };
 
-            Sucursal.count({}, (err, conteo) => {
+            Sucursal.count(query, (err, conteo) => {
                 res.json({
                     ok: true,
                     sucursales,

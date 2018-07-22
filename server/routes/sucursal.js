@@ -10,7 +10,7 @@ app.get('/sucursal', function(req, res) {
     let query = {};
     if (req.query.comuna) {
         query = {
-            comuna: req.query.comuna
+            nombre: req.query.comuna
         };
     }
 

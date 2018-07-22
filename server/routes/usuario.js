@@ -47,6 +47,7 @@ app.post('/usuario', function(req, res) {
         rut: body.rut,
         email: body.email,
         ultimaVisita: body.ultimaVisita,
+        idFacebook: body.idFacebook,
         estado: body.estado
     });
 

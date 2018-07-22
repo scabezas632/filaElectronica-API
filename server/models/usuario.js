@@ -19,6 +19,11 @@ let usuarioSchema = new Schema({
     feNaci: {
         type: Date
     },
+    idFacebook: {
+        type: String,
+        unique: true,
+        required: [true, 'El id de Facebook es obligatorio']
+    },
     estado: {
         type: Boolean,
         required: [true, 'El estado es obligatorio']

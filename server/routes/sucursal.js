@@ -34,6 +34,10 @@ app.get('/sucursal', function(req, res) {
                 });
             };
 
+            sucursales = sucursales.filter(function(sucursal) {
+                return sucursal.direccion.comuna;
+            });
+
             Sucursal.count({}, (err, conteo) => {
                 res.json({
                     ok: true,

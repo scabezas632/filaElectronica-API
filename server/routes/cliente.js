@@ -59,7 +59,7 @@ app.post('/cliente', function(req, res) {
     let body = req.body;
 
 
-    let cliente = new cliente({
+    let cliente = new Cliente({
         nombre: body.nombre,
         rut: body.rut,
         email: body.email,

@@ -34,8 +34,6 @@ app.get('/cliente/:rut', function(req, res) {
     let rut = req.params.rut;
 
     Cliente.findOne({ rut: rut })
-        .skip(desde)
-        .limit(limite)
         .exec((err, clientes) => {
 
             if (err) {

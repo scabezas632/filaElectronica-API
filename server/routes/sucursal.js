@@ -38,7 +38,6 @@ app.get('/sucursal', function(req, res) {
                 return sucursal.direccion.comuna;
             });
 
-
             res.json({
                 ok: true,
                 sucursales,

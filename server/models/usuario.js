@@ -10,11 +10,11 @@ let usuarioSchema = new Schema({
     },
     rut: {
         type: String,
+        unique: true
     },
     email: {
         type: String,
-        unique: true,
-        required: [true, 'El correo es obligatorio']
+        unique: true
     },
     feNaci: {
         type: Date

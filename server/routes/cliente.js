@@ -8,8 +8,6 @@ const app = express();
 app.get('/cliente', function(req, res) {
 
     Cliente.find({ estado: true })
-        .skip(desde)
-        .limit(limite)
         .exec((err, clientes) => {
 
             if (err) {

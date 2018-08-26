@@ -14,7 +14,17 @@ app.get('/usuario', function(req, res) {
     let limite = req.query.limite || 10;
     limite = Number(limite);
 
-    Usuario.find({ estado: true })
+    let query = { estado: true };
+    if (req.query.idFacebook) {
+        query = {
+            $and: [{
+                idFacebook: req.query.idFacebook
+            }, {
+                estado: true
+            }]
+        };
+    }
+    Usuario.find(query)
         .skip(desde)
         .limit(limite)
         .exec((err, usuarios) => {
@@ -26,7 +36,7 @@ app.get('/usuario', function(req, res) {
                 });
             };
 
-            Usuario.count({ estado: true }, (err, conteo) => {
+            Usuario.count(query, (err, conteo) => {
                 res.json({
                     ok: true,
                     usuarios,

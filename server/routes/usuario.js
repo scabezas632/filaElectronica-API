@@ -21,6 +21,8 @@ app.get('/usuario', function(req, res) {
                 idFacebook: req.query.idFacebook
             }, {
                 estado: true
+            }, {
+                rut: { $ne: null }
             }]
         };
     }

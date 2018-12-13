@@ -50,6 +50,32 @@ app.get('/usuario', function(req, res) {
 
 })
 
+app.get('/usuario/:idFacebook', function(req, res) {
+
+    let query = { idFacebook: req.params.idFacebook };
+
+    Usuario.findOne(query)
+        .exec((err, usuario) => {
+
+            if (err) {
+                return res.status(400).json({
+                    ok: false,
+                    err
+                });
+            };
+
+            Usuario.count(query, (err, conteo) => {
+                res.json({
+                    ok: true,
+                    usuario,
+                    length: conteo
+                })
+            });
+
+        })
+
+})
+
 app.post('/usuario', function(req, res) {
     let body = req.body;
 

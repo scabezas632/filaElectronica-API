@@ -110,7 +110,7 @@ app.post('/usuario', function(req, res) {
 app.put('/usuario/:id', function(req, res) {
     let id = req.params.id;
     // Campos que pueden ser modificados en el put
-    let body = _.pick(req.body, ['nombre', 'rut', 'email', 'feNaci']);
+    let body = _.pick(req.body, ['nombre', 'rut', 'email', 'feNaci', 'estado']);
 
     Usuario.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, usuarioDB) => {
 

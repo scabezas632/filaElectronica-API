@@ -8,18 +8,17 @@ app.get('/sucursal', function(req, res) {
     // Si se busca por alguna comuna en especifico
     // de lo contrario se buscan todas las sucursales
     let query = {};
-    if (req.query.comuna) {
-        query = {
-            nombre: req.query.comuna
-        };
-    }
-
-    Sucursal.find({})
+    let queryComuna = {};
+    let comuna = '';
+    if (req.query.nombre) query['nombre'] = req.query.nombre;
+    if (req.query.comuna) queryComuna['nombre'] = req.query.comuna;
+    
+    Sucursal.find(query)
         .populate({
             path: 'direccion horario horarioEspecial',
             populate: {
                 path: 'comuna',
-                match: query,
+                match: queryComuna,
                 populate: {
                     path: 'region'
                 }
@@ -33,11 +32,12 @@ app.get('/sucursal', function(req, res) {
                     err
                 });
             };
-
+            
             sucursales = sucursales.filter(function(sucursal) {
                 return sucursal.direccion.comuna;
             });
 
+            
             res.json({
                 ok: true,
                 sucursales,

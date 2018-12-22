@@ -1,5 +1,6 @@
 const express = require('express');
 const Mensaje = require('../models/mensaje');
+const moment = require('moment')
 
 const app = express();
 
@@ -32,10 +33,10 @@ app.post('/mensaje', function(req, res) {
 
     let mensaje = new mensaje({
         fromUser: body.fromUser,
-        producto: body.producto,
-        fecha: body.fecha,
+        fecha: moment(),
         intent: body.intent,
-        consulta: body.consulta
+        consulta: body.consulta,
+        producto: body.producto,
     });
 
     Mensaje.save((err, mensajeDB) => {

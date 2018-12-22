@@ -137,10 +137,10 @@ app.delete('/usuario/:id', function(req, res) {
     }
 
     // Eliminar registro
-    // Usuario.findByIdAndRemove(id, (err, usuarioBorrado) => {
+    Usuario.findByIdAndRemove(id, (err, usuarioBorrado) => {
 
     // Cambiar estado del registro
-    Usuario.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, usuarioDB) => {
+    // Usuario.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, usuarioDB) => {
 
         if (err) {
             return res.status(400).json({

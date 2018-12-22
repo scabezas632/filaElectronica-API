@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 
 app.use(require('./cliente'));
+app.use(require('./chat'));
 app.use(require('./comuna'));
 app.use(require('./consulta'));
 app.use(require('./direccion'));

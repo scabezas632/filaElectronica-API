@@ -4,29 +4,36 @@ const uniqueValidator = require('mongoose-unique-validator');
 let Schema = mongoose.Schema;
 
 let mensajeSchema = new Schema({
-    fromUser: {
+    idFacebook: {
         type: String,
-        ref: 'Usuario',
         required: [true, 'El id de facebook es obligatorio']
     },
-    producto: {
-        type: Schema.Types.ObjectId,
-        ref: 'Producto',
-    },
-    fecha: {
-        type: Date,
-        required: [true, 'La fecha es obligatoria']
+    emisor: {
+        type: String,
+        required: [true, 'El id del emisor es obligatorio']
     },
     intent: {
         type: String,
         required: [true, 'El intent es obligatorio']
     },
-    consulta: {
+    state: {
         type: String,
-        required: [true, 'La consulta es obligatoria']
+        required: [true, 'El state es obligatorio']
+    },
+    mensaje: {
+        type: String,
+        required: [true, 'El mensaje es obligatorio']
+    },
+    paramsProxMensaje: {
+        type: String
+    },
+    producto: {
+        type: Schema.Types.ObjectId,
+        ref: 'Producto',
     }
-});
+},
+{ timestamps: true });
 
 mensajeSchema.plugin(uniqueValidator, { message: '{PATH} debe ser único' });
 
-module.exports = mongoose.model('Mensaje', consultaSchema);
+module.exports = mongoose.model('Mensaje', mensajeSchema);

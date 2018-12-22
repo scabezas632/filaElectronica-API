@@ -1,5 +1,6 @@
 const express = require('express');
 const Sucursal = require('../models/sucursal');
+const moment = require('moment');
 
 const app = express();
 
@@ -9,7 +10,6 @@ app.get('/sucursal', function(req, res) {
     // de lo contrario se buscan todas las sucursales
     let query = {};
     let queryComuna = {};
-    let comuna = '';
     if (req.query.nombre) query['nombre'] = req.query.nombre;
     if (req.query.comuna) queryComuna['nombre'] = req.query.comuna;
     
@@ -37,7 +37,7 @@ app.get('/sucursal', function(req, res) {
                 return sucursal.direccion.comuna;
             });
 
-            
+
             res.json({
                 ok: true,
                 sucursales,

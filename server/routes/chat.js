@@ -1,10 +1,11 @@
 // Requires
-var express = require('express');
+const express = require('express');
+const moment = require('moment');
 
 // Inicializar variables
-var app = express();
-var Chat = require('../models/chat');
-var Mensaje = require('../models/mensaje');
+const app = express();
+const Chat = require('../models/chat');
+const Mensaje = require('../models/mensaje');
 
 // ===========================================
 // Obtener todos los chats
@@ -81,7 +82,7 @@ app.get('/chat/:idFacebook', (req, res, next) =>{
         return next(err);
       }
 
-      console.log('Petición del chat', idFacebook);
+      console.log(`${moment().format('HH:mm:ss')}: Petición del chat ${idFacebook}`);
 
       Chat.count({ idFacebook }, (err, conteo) => {
         res.status(200).json({
@@ -129,8 +130,7 @@ app.get('/chat/last/:idFacebook', (req, res, next) =>{
             return next(err);
           }
 
-          console.log('Petición del último mensaje en el chat', idFacebook);
-          console.log(mensaje)
+          console.log(`${moment().format('HH:mm:ss')}: Petición del último mensaje en el chat ${idFacebook}`);
 
           return res.status(200).json({
             ok:true,
@@ -231,6 +231,8 @@ app.post('/chat', (req, res, next)=>{
             return next(err);
         }
 
+        console.log(`${moment().format('HH:mm:ss')}: Se creó un nuevo chat para ${req.body.idFacebook}`);
+
         res.status(200).json({
             ok: true,
             message: 'Chat creado!',
@@ -267,7 +269,8 @@ app.post('/chat/send', (req, res, next)=>{
       return next(err);
     }
 
-    console.log(`${req.body.emisor} envia un mensaje a ${req.body.idFacebook}`);
+    console.log(`${moment().format('HH:mm:ss')}: ${req.body.emisor} envió un mensaje a ${req.body.idFacebook}
+          Mensaje: ${req.body.mensaje}`);
 
     res.status(200).json({
       message: 'Mensaje enviado correctamente!',

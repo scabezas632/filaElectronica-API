@@ -269,7 +269,9 @@ app.post('/chat/send', (req, res, next)=>{
       return next(err);
     }
 
-    console.log(`${moment().format('HH:mm:ss')}: ${req.body.emisor} envió un mensaje a ${req.body.idFacebook}
+    let receptor = req.body.emisor === 'FilaElectronica' ? req.body.idFacebook : 'FilaElectronica';
+
+    console.log(`${moment().format('HH:mm:ss')}: ${req.body.emisor} envió un mensaje a ${receptor}
           Mensaje: ${req.body.mensaje}`);
 
     res.status(200).json({

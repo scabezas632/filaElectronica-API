@@ -29,11 +29,15 @@ app.get('/cliente', function(req, res) {
 
 })
 
-app.get('/cliente/:rut', function(req, res) {
+app.get('/cliente', function(req, res) {
 
-    let rut = req.params.rut;
+    let query = {};
+    let rut = req.query.rut;
+    let idFacebook = req.query.idFacebook;
+    if(rut) query['rut'] = rut;
+    if(idFacebook) query['idFacebook'] = idFacebook;
 
-    Cliente.findOne({ rut: rut })
+    Cliente.findOne(query)
         .exec((err, clientes) => {
 
             if (err) {
@@ -43,7 +47,7 @@ app.get('/cliente/:rut', function(req, res) {
                 });
             };
 
-            Cliente.count({ rut: rut }, (err, conteo) => {
+            Cliente.count(query, (err, conteo) => {
                 res.json({
                     ok: true,
                     clientes,

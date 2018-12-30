@@ -9,8 +9,7 @@ let usuarioSchema = new Schema({
         required: [true, 'El nombre es obligatorio']
     },
     rut: {
-        type: String,
-        unique: true
+        type: String
     },
     email: {
         type: String,

@@ -7,7 +7,7 @@ const app = express();
 
 app.get('/cliente', function(req, res) {
 
-    Cliente.find({ estado: true })
+    Cliente.find({})
         .exec((err, clientes) => {
 
             if (err) {
@@ -17,7 +17,7 @@ app.get('/cliente', function(req, res) {
                 });
             };
 
-            Cliente.count({ estado: true }, (err, conteo) => {
+            Cliente.count({}, (err, conteo) => {
                 res.json({
                     ok: true,
                     clientes,
@@ -29,10 +29,10 @@ app.get('/cliente', function(req, res) {
 
 })
 
-app.get('/cliente', function(req, res) {
+app.get('/cliente/:rut', function(req, res) {
 
     let query = {};
-    let rut = req.query.rut;
+    let rut = req.params.rut;
     let idFacebook = req.query.idFacebook;
     if(rut) query['rut'] = rut;
     if(idFacebook) query['idFacebook'] = idFacebook;
@@ -93,7 +93,7 @@ app.post('/cliente', function(req, res) {
 app.put('/cliente/:id', function(req, res) {
     let id = req.params.id;
     // Campos que pueden ser modificados en el put
-    let body = _.pick(req.body, ['nombre', 'rut', 'email', 'feNaci']);
+    let body = _.pick(req.body, ['nombre', 'email', 'feNaci']);
 
     Cliente.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, clienteDB) => {
 

@@ -5,7 +5,10 @@ const app = express();
 
 app.get('/oferta', function(req, res) {
 
-    Oferta.find({})
+    let query = {}
+    if(req.query.producto) query['producto'] = req.query.producto;
+
+    Oferta.find(query)
         .populate({
             path: 'producto'
         })

@@ -8,11 +8,7 @@ app.get('/producto', function(req, res) {
     // Si se busca por algun codigo de barra especifico
     // de lo contrario se buscan todos los productos
     let query = {};
-    if (req.query.codigoBarra) {
-        query = {
-            codigoBarra: req.query.codigoBarra
-        };
-    }
+    if (req.query.codigoBarra) query['codigoBarra'] = req.query.codigoBarra;
 
     Producto.find(query)
         .exec((err, productos) => {

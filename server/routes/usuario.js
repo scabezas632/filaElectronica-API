@@ -79,15 +79,17 @@ app.get('/usuario/:idFacebook', function(req, res) {
 app.post('/usuario', function(req, res) {
     let body = req.body;
 
-
-    let usuario = new Usuario({
+    let data = {
         nombre: body.nombre,
-        rut: body.rut,
-        email: body.email,
-        ultimaVisita: body.ultimaVisita,
         idFacebook: body.idFacebook,
         estado: body.estado
-    });
+    }
+
+    if (body.rut) data['rut'] = body.rut;
+    if (body.email) data['email'] = body.email;
+    if (body.ultimaVisita) data['ultimaVisita'] = body.ultimaVisita;
+
+    let usuario = new Usuario(data);
 
     usuario.save((err, usuarioDB) => {
 
@@ -110,10 +112,9 @@ app.post('/usuario', function(req, res) {
 app.put('/usuario/:id', function(req, res) {
     let id = req.params.id;
     // Campos que pueden ser modificados en el put
-    let body = _.pick(req.body, ['nombre', 'rut', 'email', 'feNaci', 'estado']);
+    let body = req.body;
 
-    Usuario.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, usuarioDB) => {
-
+    Usuario.update({idFacebook: id}, {rut: body.rut}, {multi: true}, (err, usuarioDB) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
@@ -151,7 +152,7 @@ app.delete('/usuario/:id', function(req, res) {
 
         res.json({
             ok: true,
-            usuario: usuarioDB
+            usuario: usuarioBorrado
         })
     });
 

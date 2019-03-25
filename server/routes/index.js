@@ -13,6 +13,7 @@ app.use(require('./oferta'));
 app.use(require('./producto'));
 app.use(require('./region'));
 app.use(require('./sucursal'));
+app.use(require('./turno'));
 app.use(require('./usuario'));
 app.use(require('./visita'));
 

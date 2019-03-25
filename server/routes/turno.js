@@ -15,12 +15,23 @@ app.get('/turno', function (req, res) {
                 });
             };
 
-            res.json({
+            let defaultData = {
+                actualCaja: 0,
+                actualClientes: 0,
+            }
+
+            if (turnos.length === 0) {
+                Turno.create({
+                    actualCaja: 0,
+                    actualClientes: 0,
+                });
+            }
+
+            return res.json({
                 ok: true,
-                turnos: turnos[0] ? turnos[0] : turnos,
+                turnos: turnos[0] ? turnos[0] : defaultData,
                 length: turnos.length
             })
-
         })
 
 })
@@ -28,12 +39,12 @@ app.get('/turno', function (req, res) {
 app.post('/turno', function (req, res) {
     let body = req.body;
 
-    let sucursal = new Turno({
+    let turno = new Turno({
         actualCaja: body.actualCaja,
         actualClientes: body.actualClientes,
     });
 
-    sucursal.save((err, turnoDB) => {
+    turno.save((err, turnoDB) => {
 
         if (err) {
             return res.status(400).json({

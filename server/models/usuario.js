@@ -23,12 +23,22 @@ let usuarioSchema = new Schema({
         unique: true,
         required: [true, 'El id de Facebook es obligatorio']
     },
+    posicion: {
+        type: Number,
+        unique: true,
+    },
+    notificacion: {
+        type: Boolean,
+        default: false,
+    },
     estado: {
         type: Boolean,
         required: [true, 'El estado es obligatorio']
     }
 });
 
-usuarioSchema.plugin(uniqueValidator, { message: '{PATH} debe ser único' });
+usuarioSchema.plugin(uniqueValidator, {
+    message: '{PATH} debe ser único'
+});
 
 module.exports = mongoose.model('Usuario', usuarioSchema);

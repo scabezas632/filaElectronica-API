@@ -5,7 +5,7 @@ const _ = require('underscore');
 
 const app = express();
 
-app.get('/usuario', function(req, res) {
+app.get('/usuario', function (req, res) {
 
     // Parametros para paginar los resultados
     let desde = req.query.desde || 0;
@@ -14,7 +14,9 @@ app.get('/usuario', function(req, res) {
     let limite = req.query.limite || 10;
     limite = Number(limite);
 
-    let query = { estado: true };
+    let query = {
+        estado: true
+    };
     if (req.query.idFacebook) {
         query = {
             $and: [{
@@ -22,7 +24,9 @@ app.get('/usuario', function(req, res) {
             }, {
                 estado: true
             }, {
-                rut: { $ne: null }
+                rut: {
+                    $ne: null
+                }
             }]
         };
     }
@@ -50,9 +54,40 @@ app.get('/usuario', function(req, res) {
 
 })
 
-app.get('/usuario/:idFacebook', function(req, res) {
+app.get('/usuario/notificacion', function (req, res) {
+    let query = {
+        notificacion: true,
+    };
 
-    let query = { idFacebook: req.params.idFacebook };
+    Usuario.find(query)
+        .exec((err, usuarios) => {
+
+            if (err) {
+                return res.status(400).json({
+                    ok: false,
+                    err
+                });
+            };
+
+            usuarios = usuarios.filter(function (usuario) {
+                return usuario.posicion >= req.query.posicionActualCaja && usuario.posicion <= req.query.posicionActualCaja + 2;
+            });
+
+            res.json({
+                ok: true,
+                usuarios,
+                length: usuarios.length
+            })
+
+        })
+
+})
+
+app.get('/usuario/:idFacebook', function (req, res) {
+
+    let query = {
+        idFacebook: req.params.idFacebook
+    };
 
     Usuario.findOne(query)
         .exec((err, usuario) => {
@@ -76,7 +111,7 @@ app.get('/usuario/:idFacebook', function(req, res) {
 
 })
 
-app.post('/usuario', function(req, res) {
+app.post('/usuario', function (req, res) {
     let body = req.body;
 
     let data = {
@@ -109,12 +144,29 @@ app.post('/usuario', function(req, res) {
 
 })
 
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', function (req, res) {
     let id = req.params.id;
     // Campos que pueden ser modificados en el put
     let body = req.body;
 
-    Usuario.update({idFacebook: id}, {rut: body.rut}, {multi: true}, (err, usuarioDB) => {
+    let editFields = {}
+
+    if (body.rut) {
+        editFields = {
+            rut: body.rut,
+        };
+    } else if (body.posicion && body.notification) {
+        editFields = {
+            posicion: body.posicion,
+            notificacion: body.notificacion,
+        };
+    }
+
+    Usuario.update({
+        idFacebook: id
+    }, editFields, {
+        multi: true
+    }, (err, usuarioDB) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
@@ -129,7 +181,7 @@ app.put('/usuario/:id', function(req, res) {
     });
 })
 
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', function (req, res) {
 
     let id = req.params.id;
 
@@ -140,8 +192,8 @@ app.delete('/usuario/:id', function(req, res) {
     // Eliminar registro
     Usuario.findByIdAndRemove(id, (err, usuarioBorrado) => {
 
-    // Cambiar estado del registro
-    // Usuario.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, usuarioDB) => {
+        // Cambiar estado del registro
+        // Usuario.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, usuarioDB) => {
 
         if (err) {
             return res.status(400).json({

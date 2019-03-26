@@ -62,45 +62,55 @@ app.post('/turno', function (req, res) {
 
 })
 
-app.put('/turno/:id', function (req, res) {
+app.put('/turno', function (req, res) {
     let id = req.params.id;
 
-    Turno.findByIdAndUpdate(id, req.body, (err, turnoDB) => {
+    Turno.find()
+        .exec(function (err, docs) {
+            const ids = docs.map(doc => doc._id);
 
-        if (err) {
-            return res.status(400).json({
-                ok: false,
-                err
+            Turno.update({
+                "_id": {
+                    "$in": ids
+                }
+            }, req.body, {
+                "multi": true
+            }, (err, turnoDB) => {
+                if (err) {
+                    return res.status(400).json({
+                        ok: false,
+                        err
+                    });
+                }
+
+                res.json({
+                    ok: true,
+                    turno: turnoDB
+                })
             });
-        }
-
-        res.json({
-            ok: true,
-            turno: turnoDB
-        })
-    });
+        });
 })
 
-app.delete('/turno/:id', function (req, res) {
+// app.delete('/turno/:id', function (req, res) {
 
-    let id = req.params.id;
+//     let id = req.params.id;
 
-    // Eliminar registro
-    Turno.findByIdAndRemove(id, (err, turnoBorrado) => {
+//     // Eliminar registro
+//     Turno.findByIdAndRemove(id, (err, turnoBorrado) => {
 
-        if (err) {
-            return res.status(400).json({
-                ok: false,
-                err
-            });
-        }
+//         if (err) {
+//             return res.status(400).json({
+//                 ok: false,
+//                 err
+//             });
+//         }
 
-        res.json({
-            ok: true,
-            turno: turnoBorrado
-        })
-    });
+//         res.json({
+//             ok: true,
+//             turno: turnoBorrado
+//         })
+//     });
 
-})
+// })
 
 module.exports = app;

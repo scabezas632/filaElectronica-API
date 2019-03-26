@@ -155,9 +155,12 @@ app.put('/usuario/:id', function (req, res) {
         editFields = {
             rut: body.rut,
         };
-    } else if (body.posicion && body.notification) {
+    } else if (body.posicion) {
         editFields = {
             posicion: body.posicion,
+        };
+    } else if (body.notification) {
+        editFields = {
             notificacion: body.notificacion,
         };
     }

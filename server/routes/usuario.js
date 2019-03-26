@@ -159,7 +159,7 @@ app.put('/usuario/:id', function (req, res) {
         editFields = {
             posicion: body.posicion,
         };
-    } else if (body.notification) {
+    } else if (body.notificacion) {
         editFields = {
             notificacion: body.notificacion,
         };
